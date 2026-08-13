@@ -27,7 +27,7 @@
           <div class="leading-none">
             <p class="text-2xl font-bold text-slate-900">MORSE</p>
 
-            <p class="text-[10px] text-slate-500 mt-1">ACADEMY</p>
+            <p class="text-[12px] text-slate-500 mt-1">A C A D E M Y</p>
           </div>
         </div>
 
@@ -41,29 +41,46 @@
 
         <form id="loginForm" class="space-y-5">
           <div>
-            <label for="username">Username :</label>
+            <label class="text-gray-700" for="username">Username :</label>
+            <div class="relative mt-2">
+              
+              <img
+                src="../assets/user.svg"
+                alt=""
+                class="absolute left-4 top-2.5  w-5 h-5"
+              />
 
-            <input
-              type="text"
-              id="username"
-              name="username"
-              autocomplete="username"
-              placeholder="Enter your username"
-              class="w-full h-12 px-4 rounded-lg border border-slate-200"
-            />
+              <input
+                type="text"
+                id="username"
+                name="username"
+                autocomplete="username"
+                placeholder="Enter your username"
+                class="w-full h-12 pl-12 pr-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+              />
+            </div>
           </div>
 
           <div>
-            <label for="password">Password :</label>
+            <label class="text-gray-700" for="password">Password :</label>
 
-            <input
-              type="password"
-              id="password"
-              name="password"
-              autocomplete="current-password"
-              placeholder="Enter your password"
-              class="w-full h-12 px-4 rounded-lg border border-slate-200"
-            />
+            <div class="relative mt-2">
+              
+              <img
+                src="../assets/lock.svg"
+                alt=""
+                class="absolute left-4 top-2.5  w-5 h-5"
+              />
+
+              <input
+                type="password"
+                id="password"
+                name="password"
+                autocomplete="current-password"
+                placeholder="Enter your password"
+                class="w-full h-12 pl-12 pr-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+              />
+            </div>
           </div>
 
           <button
@@ -73,7 +90,7 @@
           >
             Log In
           </button>
-          <p id="loginError" class="hidden text-sm "></p>
+          <p id="loginError" class="hidden text-sm"></p>
         </form>
       </section>
 

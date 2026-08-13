@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: "vazirmatn";
+  src: url("./assets/fonts/Vazirmatn-Regular.woff2") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "vazirmatn";
+  src: url("./assets/fonts/Vazirmatn-Regular.woff2") format("truetype");
+  font-weight: 700;
+}
+
+body {
+  font-family: "vazirmatn", sans-serif;
+}
