@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Academy Morse</title>
+    <link href="../output.css" rel="stylesheet" />
+  </head>
+  <body
+    class="h-screen overflow-hidden bg-slate-100 flex items-center justify-center p-4"
+  >
+    <main
+      dir="ltr"
+      class="w-full max-w-9xl h-[650px] overflow-hidden rounded-2xl bg-white shadow-xl grid grid-cols-1 lg:grid-cols-2"
+    >
+      <section class="h-full px-5 py-6 lg:px-14 lg:py-10">
+        <!-- Logo -->
+        <div class="flex items-center gap-3 mb-12">
+          <div class="w-16 h-16">
+            <img
+              src="../assets/photo_2026-08-13_12-41-23.jpg"
+              alt="icon-academy"
+              class="w-full h-full object-contain"
+            />
+          </div>
+
+          <div class="leading-none">
+            <p class="text-2xl font-bold text-slate-900">MORSE</p>
+
+            <p class="text-[10px] text-slate-500 mt-1">ACADEMY</p>
+          </div>
+        </div>
+
+        <div class="mb-8">
+          <div class="text-2xl font-bold text-indigo-600 mb-2">
+            Academy Management Dashboard
+          </div>
+
+          <div class="text-sm text-slate-500">Log in to your account</div>
+        </div>
+
+        <form id="loginForm" class="space-y-5">
+          <div>
+            <label for="username">Username :</label>
+
+            <input
+              type="text"
+              id="username"
+              name="username"
+              autocomplete="username"
+              placeholder="Enter your username"
+              class="w-full h-12 px-4 rounded-lg border border-slate-200"
+            />
+          </div>
+
+          <div>
+            <label for="password">Password :</label>
+
+            <input
+              type="password"
+              id="password"
+              name="password"
+              autocomplete="current-password"
+              placeholder="Enter your password"
+              class="w-full h-12 px-4 rounded-lg border border-slate-200"
+            />
+          </div>
+
+          <button
+            id="button"
+            type="submit"
+            class="w-full h-12 rounded-lg bg-indigo-600 text-white font-semibold"
+          >
+            Log In
+          </button>
+        </form>
+      </section>
+
+      <section class="relative hidden lg:block h-full overflow-hidden">
+        <img
+          src="../assets/photo_2026-08-13_13-35-21.jpg"
+          alt="Student using laptop"
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+      </section>
+    </main>
+
+    <script type="module" src="../js/login.js"></script>
+  </body>
+</html>
