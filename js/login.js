@@ -15,6 +15,10 @@ loginForm.addEventListener("submit", async (event) => {
         const res = await responseLogin(username, password);
         console.log(res);
 
+        if (res.status === 200){
+            window.location.href = "./dashboard.html";
+        }
+
         if (res.status === 400) {
             loginError.textContent = "Username or password is incorrect.";
             loginError.classList.remove("hidden");
