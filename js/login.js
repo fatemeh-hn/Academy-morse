@@ -1,3 +1,4 @@
+import "../input.css";
 import { responseLogin } from "../api/auth.js";
 
 const userUsername = document.getElementById("username");
@@ -13,7 +14,7 @@ loginForm.addEventListener("submit", async (event) => {
 
     try {
         const res = await responseLogin(username, password);
-        console.log(res);
+        
 
         if (res.status === 200){
             window.location.href = "./dashboard.html";
