@@ -1,51 +1,160 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+  </head>
 
-    <main>
-        <section>
-            <div>
-                <div>
-                    <img src="../assets/photo_2026-08-13_12-41-23.jpg" alt="icon-img">
-                </div>
-                <div>
-                    <p>MORSE</p>
-                    <P>A C A D E M Y</P>
-                </div>
+  <body
+    class="h-screen overflow-hidden bg-slate-100 flex items-center justify-center p-4"
+  >
+    <main
+      dir="ltr"
+      class="w-full max-w-9xl h-[650px] overflow-hidden rounded-2xl bg-white shadow-xl flex"
+    >
+      <section
+        class="w-[220px] h-full bg-indigo-900 text-white px-5 py-7 flex flex-col"
+      >
+        <div class="flex items-center gap-3 mb-12">
+          <div class="w-16 h-16">
+            <img
+              src="../assets/photo_2026-08-13_12-41-23.jpg"
+              alt="icon-img"
+              class="w-full h-full object-contain rounded-md"
+            />
+          </div>
+
+          <div class="leading-none">
+            <p class="text-2xl font-bold">MORSE</p>
+            <p class="text-[12px] text-slate-400 mt-1">A C A D E M Y</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <div
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-indigo-600 cursor-pointer"
+          >
+            <img src="../assets/group.svg" alt="" class="w-5 h-5 invert" />
+
+            <p>Students</p>
+          </div>
+
+          <div
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-indigo-600 cursor-pointer"
+          >
+            <img src="../assets/book.svg" alt="" class="w-5 h-5 invert" />
+
+            <p>Courses</p>
+          </div>
+        </div>
+
+        <div class="mt-auto">
+          <div
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-indigo-600 cursor-pointer"
+          >
+            <img src="../assets/log-out.svg" alt="" class="w-5 h-5 invert" />
+
+            <p>LogOut</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="flex-1 h-full px-10 py-10">
+        <div class="mb-10">
+          <p class="text-3xl font-bold text-black">Dashboard</p>
+        </div>
+
+        <div class="grid grid-cols-4 gap-5">
+          <div
+            class="h-[220px] rounded-xl border border-slate-200 shadow-sm flex flex-col items-center justify-center"
+          >
+            <div
+              class="w-20 h-20 rounded-full bg-blue-200 flex items-center justify-center mb-5"
+            >
+              <img src="../assets/user-plus.svg" alt="" class="w-8 h-8" />
             </div>
-            <div>
-                <p>Students</p>
-                <p>Courses</p>
 
-                <div>
-                    LogOut
-                </div>
+            <div class="text-center">
+              <p
+                id="totalStudents"
+                class="text-sm font-medium text-slate-600"
+              ></p>
+              <span
+                id="totalStudentsCount"
+                class="block text-2xl font-bold text-slate-900 mt-2"
+              ></span>
+            </div>
+          </div>
+
+          <div
+            class="h-[220px] rounded-xl border border-slate-200 shadow-sm flex flex-col items-center justify-center"
+          >
+            <div
+              class="w-20 h-20 rounded-full bg-green-200 flex items-center justify-center mb-5"
+            >
+              <img src="../assets/community.svg" alt="" class="w-8 h-8" />
             </div>
 
-        </section>
-        <section>
-            <div>
-                Dashboard
+            <div class="text-center">
+              <p
+                id="activeStudents"
+                class="text-sm font-medium text-slate-600"
+              ></p>
+              <span
+                id="activeStudentsCount"
+                class="block text-2xl font-bold text-slate-900 mt-2"
+              ></span>
             </div>
-            <div>
-                <div>
-                    <img src="" alt="">
+          </div>
 
-                </div>
-                <div>
-                    <p></p>
-                    <span></span>
-                </div>
+          <div
+            class="h-[220px] rounded-xl border border-slate-200 shadow-sm flex flex-col items-center justify-center"
+          >
+            <div
+              class="w-20 h-20 rounded-full bg-amber-200 flex items-center justify-center mb-5"
+            >
+              <img src="../assets/graduation-cap.svg" alt="" class="w-8 h-8" />
             </div>
 
-        </section>
+            <div class="text-center">
+              <p
+                id="graduatedStudents"
+                class="text-sm font-medium text-slate-600"
+              ></p>
+              <span
+                id="graduatedStudentsCount"
+                class="block text-2xl font-bold text-slate-900 mt-2"
+              ></span>
+            </div>
+          </div>
+
+          <div
+            class="h-[220px] rounded-xl border border-slate-200 shadow-sm flex flex-col items-center justify-center"
+          >
+            <div
+              class="w-20 h-20 rounded-full bg-purple-200 flex items-center justify-center mb-5"
+            >
+              <img src="../assets/open-book.svg" alt="" class="w-8 h-8" />
+            </div>
+
+            <div class="text-center">
+              <p
+                id="totalCourses"
+                class="text-sm font-medium text-slate-600"
+              ></p>
+              <span
+                id="totalCoursesCount"
+                class="block text-2xl font-bold text-slate-900 mt-2"
+              ></span>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
-    <p id="dashboardError" class="hidden text-sm"></p>
-    <script src="../api/dashboard.js"></script>
-</body>
+
+    <p id="dashboardError" class="hidden text-sm text-red-500"></p>
+
+    <script type="module" src="../js/dashboard.js"></script>
+  </body>
 </html>
