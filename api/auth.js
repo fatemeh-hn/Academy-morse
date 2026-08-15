@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 const loginError = document.getElementById("loginError");
 export const responseLogin = async (username, password) => {
     try {
@@ -6,8 +7,10 @@ export const responseLogin = async (username, password) => {
                 "Content-Type": "application/json"
             }, body: JSON.stringify({ username: username, password: password })
         });
-
         const data = await response.json();
+        Cookies.set("token", data.data.token, { expires: 7, secure: true, sameSite : 'Strict' })
+
+
         return {
             status: response.status,
             data,

@@ -8,6 +8,7 @@
   "dependencies": {
     "@tailwindcss/cli": "^4.3.3",
     "@tailwindcss/vite": "^4.3.3",
+    "js-cookie": "^3.0.8",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
