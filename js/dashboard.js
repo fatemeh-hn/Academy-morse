@@ -10,7 +10,9 @@ const totalCoursesCount = document.getElementById("totalCoursesCount");
 
 const students = document.getElementById("students");
 const courses = document.getElementById("courses");
+const about = document.getElementById("about");
 const logout = document.getElementById("logout");
+
 
 
 const loadDashboard = async () => {
@@ -42,5 +44,9 @@ students.addEventListener("click" , () =>{
 
 courses.addEventListener("click" , () =>{
     window.location.href = "./courses.html";
+});
+
+about.addEventListener("click" , () =>{
+    window.location.href = "./about.html";
 });
 

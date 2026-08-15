@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+      <body
+        class="h-screen overflow-hidden bg-slate-100 flex items-center justify-center p-4"
+      >
+        <main
+          dir="ltr"
+          class="w-full max-w-9xl h-[650px] overflow-hidden rounded-2xl bg-white shadow-xl flex"
+        >
+          
+          <section
+            class="w-[220px] h-full bg-indigo-900 text-white px-5 py-7 flex flex-col"
+          >
+            
+            <div class="flex items-center gap-3 mb-12">
+              <div class="w-16 h-16">
+                <img
+                  src="../assets/photo_2026-08-13_12-41-23.jpg"
+                  alt="icon-img"
+                  class="w-full h-full object-contain rounded-md"
+                />
+              </div>
+
+              <div class="leading-none">
+                <p class="text-2xl font-bold">MORSE</p>
+                <p class="text-[12px] text-slate-400 mt-1">A C A D E M Y</p>
+              </div>
+            </div>
+
+            
+            <div class="flex flex-col gap-3">
+              <div
+                id="students"
+                class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-indigo-600 cursor-pointer"
+              >
+                <img src="../assets/group.svg" alt="" class="w-5 h-5 invert" />
+
+                <p>Students</p>
+              </div>
+
+              <div
+                id="courses"
+                class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-indigo-600 cursor-pointer"
+              >
+                <img src="../assets/book.svg" alt="" class="w-5 h-5 invert" />
+
+                <p>Courses</p>
+              </div>
+
+              
+              <div
+                id="about"
+                class="flex items-center gap-3 px-4 py-3 rounded-lg bg-indigo-600 text-white cursor-pointer"
+              >
+                <img
+                  src="../assets/info-circle.svg"
+                  alt=""
+                  class="w-5 h-5 invert"
+                />
+
+                <p>About</p>
+              </div>
+            </div>
+
+            
+            <div class="mt-auto">
+              <div
+                id="logout"
+                class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-indigo-600 cursor-pointer"
+              >
+                <img
+                  src="../assets/log-out.svg"
+                  alt=""
+                  class="w-5 h-5 invert"
+                />
+
+                <p>LogOut</p>
+              </div>
+            </div>
+          </section>
+
+          
+          <section class="flex-1 h-full px-10 py-10">
+            
+            <div class="mb-10">
+              <p class="text-3xl font-bold text-black">About</p>
+              <p class="text-sm text-slate-900 mt-2">
+                Information about the Academy
+              </p>
+            </div>
+
+            
+            <div class="grid grid-cols-2 gap-5">
+              
+              <div
+                class="h-[180px] rounded-xl border border-slate-200 shadow-sm p-7 flex flex-col justify-center"
+              >
+                <div
+                  class="w-12 h-12 rounded-lg bg-blue-200 flex items-center justify-center mb-5"
+                >
+                  <img src="../assets/apple-imac2021.svg" alt="" class="w-6 h-6 " />
+                </div>
+
+                <p class="text-sm text-slate-900">ApplicationName</p>
+
+                <p
+                  id="applicationName"
+                  class="text-xl font-bold text-slate-500 mt-1"
+                ></p>
+              </div>
+
+              
+              <div
+                class="h-[180px] rounded-xl border border-slate-200 shadow-sm p-7 flex flex-col justify-center"
+              >
+                <div
+                  class="w-12 h-12 rounded-lg bg-purple-200 flex items-center justify-center mb-5"
+                >
+                  <img src="../assets/git.svg" alt="" class="w-6 h-6 " />
+                </div>
+
+                <p class="text-sm text-slate-900">Version</p>
+
+                <p
+                  id="version"
+                  class="text-xl font-bold text-slate-500 mt-1"
+                ></p>
+              </div>
+            </div>
+
+            
+            <div class="mt-5 rounded-xl border border-slate-200 shadow-sm p-7">
+              <p class="text-sm text-slate-900 mb-2">Author</p>
+
+              <p id="author" class="text-lg font-medium text-slate-500"></p>
+            </div>
+
+            
+            <div class="mt-5 rounded-xl border border-slate-200 shadow-sm p-7">
+              <p class="text-sm text-slate-900  mb-2">CurrentTime</p>
+
+              <p
+                id="currentTime"
+                class="text-lg font-medium text-slate-500 "
+              ></p>
+            </div>
+          </section>
+        </main>
+
+        <p id="aboutError" class="hidden text-sm text-red-500"></p>
+
+        <script type="module" src="../js/about.js"></script>
+      </body>
+    </html>
+  </body>
+</html>
