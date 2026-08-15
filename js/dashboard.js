@@ -33,20 +33,3 @@ const loadDashboard = async () => {
 await loadDashboard();
 
 
-logout.addEventListener("click" , () =>{
-    window.location.href = "./login.html";
-});
-
-
-students.addEventListener("click" , () =>{
-    window.location.href = "./students.html";
-});
-
-courses.addEventListener("click" , () =>{
-    window.location.href = "./courses.html";
-});
-
-about.addEventListener("click" , () =>{
-    window.location.href = "./about.html";
-});
-
