@@ -28,17 +28,29 @@ export const createRequest = async (courseData) => {
         }
 
         return {
-  status: response.status,
-  data,
-};
+            status: response.status,
+            data,
+        };
 
     } catch {
         coursesError.textContent = "Unable to connect to the server.";
 
     }
-
-
-
 }
+
+export const fetchCoursesId = async (id) => {
+    try {
+        const response = await fetch(`http://localhost:5074/api/courses/${id}`
+            , { method: "GET" });
+        const data = await response.json();
+        return data
+
+    } catch {
+        coursesError.textContent = "Unable to connect to the server.";
+
+    }
+}
+
+
 
 
