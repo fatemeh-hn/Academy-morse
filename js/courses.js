@@ -1,4 +1,5 @@
-import { createRequest } from "../api/courses.js";
+import { editCourses} from "../api/courses.js";
+import { deleteCourses } from "../api/courses.js";
 
 const courseData = {
   title: "JavaScript",
@@ -9,6 +10,18 @@ const courseData = {
   isActive: true,
 };
 
-const result = await createRequest(courseData);
+const result = await editCourses(4, courseData);;
 
 console.log(result);
+
+
+
+const result = await deleteCourses(4);
+
+if (result.status === 200) {
+  console.log(result.data.message);
+} else if (result.status === 400) {
+  console.log(result.data.message);
+} else if (result.status === 404) {
+  console.log(result.data.message);
+}
