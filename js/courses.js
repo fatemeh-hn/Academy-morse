@@ -1,5 +1,5 @@
 import "../input.css"
-import { fetchCourses, fetchCoursesId, createRequest } from "../api/courses";
+import { fetchCourses, fetchCoursesId, createRequest , deleteCourses} from "../api/courses";
 
 const coursesTableBody = document.getElementById("coursesTableBody");
 
@@ -16,8 +16,7 @@ const renderCourses = async () => {
 
     courses.forEach((course) => {
       coursesTableBody.innerHTML += `
-        <tr class="hover:bg-slate-100 cursor-pointer"
-                     data-course-id="${course.id}">
+        <tr>
           <td class="px-4 py-4">
             ${course.id}
           </td>
@@ -26,21 +25,46 @@ const renderCourses = async () => {
             ${course.title}
           </td>
 
+          <td class="px-4 py-4">
+          <button
+          type="button"
+          class="details-course px-4 py-2 text-xs font-medium rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 hover:scale-105
+          transition-transform duration-200"
+          data-id="${course.id}"
+          >
+          details
+          </button>
+          </td>
+
           <td class="px-4 py-4 text-center">
           ${course.isActive
-          ? '<span class="px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-700">Active</span>'
-          : '<span class="px-3 py-1 text-xs font-medium rounded-full bg-red-100 text-red-700">Inactive</span>'
+          ? '<span class="px-3 py-1 text-xs font-medium rounded-full  text-green-600">Active</span>'
+          : '<span class="px-3 py-1 text-xs font-medium rounded-full  text-red-600">Inactive</span>'
         }
           </td>
 
           <td class="px-4 py-4 text-center">
-          <div>
-          <span class="px-3 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-700">Edit</span>
-          <span class="px-3 py-1 text-xs font-medium rounded-full bg-red-100 text-red-700">Delete</span> 
-          <div/>
-          
+          <div class="flex items-center justify-center gap-2">
 
-            
+          <button
+          type="button"
+          class="edit-course px-4 py-2 text-xs font-medium rounded-full bg-yellow-100 text-yellow-700 hover:bg-yellow-200 hover:scale-105
+         transition-transform duration-200"
+          data-id="${course.id}"
+          >
+          Edit
+          </button>
+
+          <button
+          type="button"
+          class="delete-course px-4 py-2 text-xs font-medium rounded-full bg-red-100 text-red-700 hover:bg-red-200 hover:scale-105
+         transition-transform duration-200"
+          data-id="${course.id}"
+          >
+          Delete
+          </button>
+
+         </div>
           </td>
         </tr>
       `;
@@ -68,11 +92,11 @@ const detailStatus = document.getElementById("detailStatus");
 
 coursesTableBody.addEventListener("click", async (event) => {
 
-  const row = event.target.closest("tr");
+  const detailsButton = event.target.closest(".details-course");
 
-  if (!row) return;
+  if (!detailsButton) return;
 
-  const id = row.dataset.courseId;
+  const id = detailsButton.dataset.id;
 
   try {
 
@@ -167,6 +191,79 @@ addCourseForm.addEventListener("submit", async (event) => {
 });
 
 
+//render delete modal
+const deleteCourseModal = document.getElementById("deleteCourseModal");
+const cancelDeleteCourse = document.getElementById("cancelDeleteCourse");
+const confirmDeleteCourse = document.getElementById("confirmDeleteCourse");
+
+const deleteCourseTitle = document.getElementById("deleteCourseTitle");
+const deleteCourseError = document.getElementById("deleteCourseError");
+
+let selectedCourseId = null;
+
+coursesTableBody.addEventListener("click", async (event) => {
+
+  const deleteButton = event.target.closest(".delete-course");
+
+  if (!deleteButton) return;
+
+  const id = deleteButton.dataset.id;
+
+  selectedCourseId = id;
+
+  const response = await fetchCoursesId(id);
+  const course = response.data;
+
+  deleteCourseTitle.textContent = course.title;
+
+  deleteCourseError.classList.add("hidden");
+
+  deleteCourseModal.classList.remove("hidden");
+});
+
+cancelDeleteCourse.addEventListener("click", () => {
+  deleteCourseModal.classList.add("hidden");
+
+  selectedCourseId = null;
+});
+
+confirmDeleteCourse.addEventListener("click", async () => {
+
+  if (!selectedCourseId) return;
+
+  try {
+
+    const response = await deleteCourses(selectedCourseId);
+
+    if (response.status === 200) {
+
+      deleteCourseModal.classList.add("hidden");
+
+      selectedCourseId = null;
+
+      await renderCourses();
+
+    } else if (response.status === 400) {
+
+      deleteCourseError.textContent = response.data.message;
+      deleteCourseError.classList.remove("hidden");
+
+    } else if (response.status === 404) {
+
+      deleteCourseError.textContent = response.data.message;
+      deleteCourseError.classList.remove("hidden");
+
+    }
+
+  } catch (error) {
+
+    console.log(error);
+
+    deleteCourseError.textContent = "Unable to connect to the server.";
+    deleteCourseError.classList.remove("hidden");
+
+  }
+});
 
 
 

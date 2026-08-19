@@ -128,6 +128,8 @@
 
                   <th class="px-4 py-4 font-semibold">Title</th>
 
+                  <th class="px-4 py-4 font-semibold">Details</th>
+
                   <th class="px-4 py-4 font-semibold text-center">Active</th>
 
                   <th class="px-4 py-4 font-semibold text-center">Actions</th>
@@ -275,7 +277,73 @@
       </div>
     </div>
 
-    <!-- JavaScript -->
+    
+
+    
+    <!-- DELETE COURSE MODAL -->
+    <div
+      id="deleteCourseModal"
+      class="hidden fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+    >
+      <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-7">
+        
+        <div class="flex justify-center mb-5">
+          <div
+            class="w-14 h-14 rounded-full bg-red-100 flex items-center justify-center"
+          >
+            <img
+              id="deleteModalIcon"
+              src="../assets/trash.svg"
+              alt=""
+              class="w-7 h-7"
+            />
+          </div>
+        </div>
+
+        
+        <h2 class="text-xl font-bold text-center text-slate-900">
+          Delete Course
+        </h2>
+
+        
+        <p class="text-sm text-slate-500 text-center mt-3">
+          Are you sure you want to delete this course?
+        </p>
+
+        
+        <p
+          id="deleteCourseTitle"
+          class="text-center font-semibold text-slate-800 mt-2"
+        ></p>
+
+        
+        <p
+          id="deleteCourseError"
+          class="hidden text-sm text-red-500  text-center mt-4"
+        ></p>
+
+        
+        <div class="flex justify-center gap-3 mt-7">
+          <button
+            id="cancelDeleteCourse"
+            type="button"
+            class="px-5 h-10 rounded-lg border border-slate-200 hover:bg-slate-300  text-slate-700"
+          >
+            Cancel
+          </button>
+
+          <button
+            id="confirmDeleteCourse"
+            type="button"
+            class="px-5 h-10 rounded-lg bg-red-500 hover:bg-red-700 text-white font-semibold"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+
+    
     <script type="module" src="../js/courses.js"></script>
     <script type="module" src="../js/navigation.js"></script>
   </body>
