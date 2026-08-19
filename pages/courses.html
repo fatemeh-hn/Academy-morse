@@ -146,6 +146,134 @@
       </section>
     </main>
 
+    <!-- add course modal -->
+    <div
+      id="addCourseModal"
+      class="hidden fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+    >
+      <div class="w-full max-w-lg bg-white rounded-2xl shadow-xl p-7">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-2xl font-bold text-slate-900">Add Course</h2>
+
+          <button
+            id="closeAddCourseModal"
+            type="button"
+            class="text-red-400 hover:text-red-700 text-xl"
+          >
+            ✕
+          </button>
+        </div>
+
+        <!-- Form -->
+        <form id="addCourseForm" class="space-y-4">
+          
+          <div>
+            <label
+              for="addTitle"
+              class="block text-sm font-medium text-slate-700 mb-1"
+            >
+              Title
+            </label>
+
+            <input
+              id="addTitle"
+              type="text"
+              class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+            />
+          </div>
+
+          
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label
+                for="addPrice"
+                class="block text-sm font-medium text-slate-700 mb-1"
+              >
+                Price
+              </label>
+
+              <input
+                id="addPrice"
+                type="number"
+                class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+              />
+            </div>
+
+            <div>
+              <label
+                for="addCapacity"
+                class="block text-sm font-medium text-slate-700 mb-1"
+              >
+                Capacity
+              </label>
+
+              <input
+                id="addCapacity"
+                type="number"
+                class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+              />
+            </div>
+          </div>
+
+          
+          <div>
+            <label
+              for="addTeacher"
+              class="block text-sm font-medium text-slate-700 mb-1"
+            >
+              Teacher
+            </label>
+
+            <input
+              id="addTeacher"
+              type="text"
+              class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+            />
+          </div>
+
+          
+          <div>
+            <label
+              for="addDuration"
+              class="block text-sm font-medium text-slate-700 mb-1"
+            >
+              Duration
+            </label>
+
+            <input
+              id="addDuration"
+              type="number"
+              class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+            />
+          </div>
+
+          
+          <label class="flex items-center gap-3">
+            <input id="addIsActive" type="checkbox" class="w-4 h-4" />
+
+            <span class="text-sm text-slate-700"> Active </span>
+          </label>
+
+          
+          <div class="flex justify-end gap-3 pt-4">
+            <button
+              id="cancelAddCourse"
+              type="button"
+              class="px-5 h-10 rounded-lg border border-slate-200 text-slate-700"
+            >
+              Cancel
+            </button>
+
+            <button
+              type="submit"
+              class="px-5 h-10 rounded-lg bg-indigo-600 text-white font-semibold"
+            >
+              Add Course
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <!-- JavaScript -->
     <script type="module" src="../js/courses.js"></script>

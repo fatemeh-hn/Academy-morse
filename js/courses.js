@@ -1,8 +1,10 @@
 import "../input.css"
-import { fetchCourses, fetchCoursesId } from "../api/courses";
+import { fetchCourses, fetchCoursesId, createRequest } from "../api/courses";
 
 const coursesTableBody = document.getElementById("coursesTableBody");
 
+
+//render all courses
 const renderCourses = async () => {
   try {
     const response = await fetchCourses();
@@ -32,6 +34,12 @@ const renderCourses = async () => {
           </td>
 
           <td class="px-4 py-4 text-center">
+          <div>
+          <span class="px-3 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-700">Edit</span>
+          <span class="px-3 py-1 text-xs font-medium rounded-full bg-red-100 text-red-700">Delete</span> 
+          <div/>
+          
+
             
           </td>
         </tr>
@@ -102,7 +110,61 @@ closeCourseDetailModal.addEventListener("click", () => {
 
 
 
+//render add course modal
+const addCourseButton = document.getElementById("addCourseButton");
+const addCourseModal = document.getElementById("addCourseModal");
+const closeAddCourseModal = document.getElementById("closeAddCourseModal");
+const cancelAddCourse = document.getElementById("cancelAddCourse");
 
+addCourseButton.addEventListener("click", () => {
+  addCourseModal.classList.remove("hidden");
+});
+
+closeAddCourseModal.addEventListener("click", () => {
+  addCourseModal.classList.add("hidden");
+});
+
+cancelAddCourse.addEventListener("click", () => {
+  addCourseModal.classList.add("hidden");
+});
+
+const addCourseForm = document.getElementById("addCourseForm");
+const title = document.getElementById("addTitle");
+const price = document.getElementById("addPrice");
+const capacity = document.getElementById("addCapacity");
+const teacher = document.getElementById("addTeacher");
+const duration = document.getElementById("addDuration");
+const isActive = document.getElementById("addIsActive");
+
+
+addCourseForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const courseData = {
+    title: title.value,
+    price: Number(price.value),
+    capacity: Number(capacity.value),
+    teacher: teacher.value,
+    duration: Number(duration.value),
+    isActive: isActive.checked,
+  };
+
+  try {
+    const response = await createRequest(courseData);
+
+    if (response.status === 201) {
+      addCourseModal.classList.add("hidden");
+      addCourseForm.reset();
+      await renderCourses();
+    } else if (response.status === 400) {
+
+      console.log(response.data.message);
+    }
+
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 
 

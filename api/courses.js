@@ -24,9 +24,6 @@ export const createRequest = async (courseData) => {
         });
 
         const data = await response.json();
-        if (response.status === 400) {
-            coursesError.textContent = "Bad Request";
-        }
 
         return {
             status: response.status,
