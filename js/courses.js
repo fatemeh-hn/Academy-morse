@@ -1,5 +1,5 @@
 import "../input.css"
-import { fetchCourses, fetchCoursesId, createRequest , deleteCourses} from "../api/courses";
+import { fetchCourses, fetchCoursesId, createRequest, deleteCourses, editCourses } from "../api/courses";
 
 const coursesTableBody = document.getElementById("coursesTableBody");
 
@@ -14,8 +14,7 @@ const renderCourses = async () => {
 
     coursesTableBody.innerHTML = "";
 
-    courses.forEach((course) => {
-      coursesTableBody.innerHTML += `
+    courses.forEach((course) => { coursesTableBody.innerHTML += `
         <tr>
           <td class="px-4 py-4">
             ${course.id}
@@ -265,7 +264,125 @@ confirmDeleteCourse.addEventListener("click", async () => {
   }
 });
 
+//render edit modal
 
+const editCourseModal = document.getElementById("editCourseModal");
+const closeEditCourseModal = document.getElementById("closeEditCourseModal");
+const cancelEditCourse = document.getElementById("cancelEditCourse");
+const editCourseForm = document.getElementById("editCourseForm");
+
+const editCourseId = document.getElementById("editCourseId");
+const editTitle = document.getElementById("editTitle");
+const editPrice = document.getElementById("editPrice");
+const editCapacity = document.getElementById("editCapacity");
+const editTeacher = document.getElementById("editTeacher");
+const editDuration = document.getElementById("editDuration");
+const editIsActive = document.getElementById("editIsActive");
+
+let selectedEditCourseId = null;
+
+coursesTableBody.addEventListener("click", async (event) => {
+
+  const editButton = event.target.closest(".edit-course");
+
+  if (!editButton) return;
+
+  const id = editButton.dataset.id;
+
+  selectedEditCourseId = id;
+
+  try {
+
+    const response = await fetchCoursesId(id);
+
+    const course = response.data;
+
+    editCourseId.value = course.id;
+    editTitle.value = course.title;
+    editPrice.value = course.price;
+    editCapacity.value = course.capacity;
+    editTeacher.value = course.teacher;
+    editDuration.value = course.duration;
+    editIsActive.checked = course.isActive;
+
+    editCourseModal.classList.remove("hidden");
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+});
+
+
+// close modal with ex
+closeEditCourseModal.addEventListener("click", () => {
+
+  editCourseModal.classList.add("hidden");
+
+  selectedEditCourseId = null;
+
+});
+
+
+// close modal with button
+cancelEditCourse.addEventListener("click", () => {
+
+  editCourseModal.classList.add("hidden");
+
+  selectedEditCourseId = null;
+
+});
+
+
+// post datails
+editCourseForm.addEventListener("submit", async (event) => {
+
+  event.preventDefault();
+
+  if (!selectedEditCourseId) return;
+
+  const courseData = {
+
+    title: editTitle.value,
+    price: Number(editPrice.value),
+    capacity: Number(editCapacity.value),
+    teacher: editTeacher.value,
+    duration: Number(editDuration.value),
+    isActive: editIsActive.checked,
+
+  };
+
+  try {
+
+    const response = await editCourses(selectedEditCourseId, courseData );
+
+    if (response.status === 200) {
+
+      editCourseModal.classList.add("hidden");
+
+      selectedEditCourseId = null;
+
+      await renderCourses();
+
+    } else if (response.status === 400) {
+
+      console.log(response.data.message);
+
+    } else if (response.status === 404) {
+
+      console.log(response.data.message);
+
+    }
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+});
 
 
 
