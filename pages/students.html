@@ -1,11 +1,594 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-   <script type="module" src="../api/students.js"></script> 
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Students</title>
+  </head>
+
+  <body
+    class="h-screen overflow-hidden bg-slate-100 flex items-center justify-center p-4"
+  >
+    <main
+      dir="ltr"
+      class="w-full max-w-9xl h-[650px] overflow-hidden rounded-2xl bg-white shadow-xl flex"
+    >
+      <div id="sidebar"></div>
+
+      <section class="flex-1 h-full px-10 py-8 overflow-hidden">
+        <div class="flex items-center justify-between mb-7">
+          <div>
+            <p class="text-3xl font-bold text-slate-900">Students</p>
+
+            <p class="text-sm text-slate-500 mt-2">Manage academy students</p>
+          </div>
+
+          <button
+            id="addStudentsButton"
+            type="button"
+            class="h-11 px-5 rounded-lg bg-indigo-600 text-white font-semibold hover:bg-indigo-700 flex items-center gap-2"
+          >
+            <img src="../assets/plus.svg" alt="" class="w-5 h-5 invert" />
+
+            <span>Add Students</span>
+          </button>
+        </div>
+
+        <!-- Students Detail Modal -->
+        <div
+          id="studentsDetailModal"
+          class="hidden fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+        >
+          <div class="w-full max-w-lg bg-gray-100 rounded-2xl shadow-xl p-7">
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <h2 class="text-2xl font-bold text-slate-900">
+                  Students Details
+                </h2>
+              </div>
+
+              <button
+                id="closeStudentsDetailModal"
+                type="button"
+                class="text-red-400 hover:text-red-700 text-2xl"
+              >
+                ✕
+              </button>
+            </div>
+
+            <!-- Details -->
+            <div class="space-y-4">
+              <div class="flex justify-between border-b border-slate-300 pb-3">
+                <span class="text-sm text-slate-500">ID</span>
+                <span id="detailId" class="font-medium text-slate-900"></span>
+              </div>
+
+              <div class="flex justify-between border-b border-slate-300 pb-3">
+                <span class="text-sm text-slate-500">FirstName</span>
+                <span
+                  id="detailFirstName"
+                  class="font-medium text-slate-900"
+                ></span>
+              </div>
+
+              <div class="flex justify-between border-b border-slate-300 pb-3">
+                <span class="text-sm text-slate-500">LastName</span>
+                <span
+                  id="detailLastName"
+                  class="font-medium text-slate-900"
+                ></span>
+              </div>
+
+              <div class="flex justify-between border-b border-slate-300 pb-3">
+                <span class="text-sm text-slate-500">Age</span>
+                <span id="detailAge" class="font-medium text-slate-900"></span>
+              </div>
+
+              <div class="flex justify-between border-b border-slate-300 pb-3">
+                <span class="text-sm text-slate-500">Phone</span>
+                <span
+                  id="detailPhone"
+                  class="font-medium text-slate-900"
+                ></span>
+              </div>
+
+              <div class="flex justify-between border-b border-slate-300 pb-3">
+                <span class="text-sm text-slate-500">Email</span>
+                <span
+                  id="detailEmail"
+                  class="font-medium text-slate-900"
+                ></span>
+              </div>
+
+              <div class="flex justify-between">
+                <span class="text-sm text-slate-500">CourseId</span>
+
+                <span
+                  id="detailcourseId"
+                  class="px-3 py-1 text-xs font-medium rounded-full"
+                ></span>
+              </div>
+
+              <div class="flex justify-between">
+                <span class="text-sm text-slate-500">CourseTitle</span>
+
+                <span
+                  id="detailCourseTitle"
+                  class="px-3 py-1 text-xs font-medium rounded-full"
+                ></span>
+              </div>
+
+              <div class="flex justify-between">
+                <span class="text-sm text-slate-500">Status</span>
+
+                <span
+                  id="detailStatus"
+                  class="px-3 py-1 text-xs font-medium rounded-full"
+                ></span>
+              </div>
+
+              <div class="flex justify-between">
+                <span class="text-sm text-slate-500">StatusName</span>
+
+                <span
+                  id="detailStatusName"
+                  class="px-3 py-1 text-xs font-medium rounded-full"
+                ></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--table-->
+        <div
+          class="border border-slate-200 rounded-xl shadow-sm overflow-hidden"
+        >
+          <div class="overflow-y-auto max-h-[500px]">
+            <table class="w-full text-sm">
+              <thead class="bg-slate-50 border-b border-slate-200">
+                <tr class="text-left text-slate-600">
+                  <th class="px-4 py-4 font-semibold">ID</th>
+
+                  <th class="px-4 py-4 font-semibold">FirstName</th>
+
+                  <th class="px-4 py-4 font-semibold">LastName</th>
+
+                  <th class="px-4 py-4 font-semibold text-center">
+                    CourseTitle
+                  </th>
+
+                  <th class="px-4 py-4 font-semibold text-center">
+                    StatusName
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody
+                id="studentsTableBody"
+                class="divide-y divide-slate-100"
+              ></tbody>
+            </table>
+          </div>
+        </div>
+
+        <p id="studentsError" class="hidden text-sm text-red-500 mt-4"></p>
+      </section>
+    </main>
+
+    <!-- add students modal -->
+    <div
+      id="addStudentsModal"
+      class="hidden fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+    >
+      <div class="w-full max-w-lg bg-white rounded-2xl shadow-xl p-7">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-2xl font-bold text-slate-900">Add Students</h2>
+
+          <button
+            id="closeAddStudentsModal"
+            type="button"
+            class="text-red-400 hover:text-red-700 text-xl"
+          >
+            ✕
+          </button>
+        </div>
+
+        <!-- Form -->
+        <form id="addStudentsForm" class="space-y-4">
+          <div>
+            <label
+              for="addFirstName"
+              class="block text-sm font-medium text-slate-700 mb-1"
+            >
+              FirstName
+            </label>
+
+            <input
+              id="addFirstName"
+              type="text"
+              class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+            />
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label
+                for="addLastName"
+                class="block text-sm font-medium text-slate-700 mb-1"
+              >
+                LastName
+              </label>
+
+              <input
+                id="addLastName"
+                type="text"
+                class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+              />
+            </div>
+
+            <div>
+              <label
+                for="addAge"
+                class="block text-sm font-medium text-slate-700 mb-1"
+              >
+                Age
+              </label>
+
+              <input
+                id="addAge"
+                type="number"
+                class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="addPhone"
+              class="block text-sm font-medium text-slate-700 mb-1"
+            >
+              Phone
+            </label>
+
+            <input
+              id="addPhone"
+              type="number"
+              class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+            />
+          </div>
+
+          <div>
+            <label
+              for="addEmail"
+              class="block text-sm font-medium text-slate-700 mb-1"
+            >
+              Email
+            </label>
+
+            <input
+              id="addEmail"
+              type="text"
+              class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+            />
+          </div>
+
+          <div>
+            <label
+              for="addCourseId"
+              class="block text-sm font-medium text-slate-700 mb-1"
+            >
+              CourseId
+            </label>
+
+            <input
+              id="addCourseId"
+              type="number"
+              class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+            />
+          </div>
+
+          <div>
+            <label
+              for="addCourseTitle"
+              class="block text-sm font-medium text-slate-700 mb-1"
+            >
+              CourseTitle
+            </label>
+
+            <input
+              id="addCourseTitle"
+              type="text"
+              class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+            />
+          </div>
+
+          <div>
+            <label
+              for="addstatus"
+              class="block text-sm font-medium text-slate-700 mb-1"
+            >
+              Status
+            </label>
+
+            <input
+              id="addstatus"
+              type="number"
+              class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+            />
+          </div>
+
+          <div>
+            <label
+              for="addStatusName"
+              class="block text-sm font-medium text-slate-700 mb-1"
+            >
+              StatusName
+            </label>
+
+            <input
+              id="addStatusName"
+              type="number"
+              class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+            />
+          </div>
+
+          <div class="flex justify-end gap-3 pt-4">
+            <button
+              id="cancelAddStudents"
+              type="button"
+              class="px-5 h-10 rounded-lg border border-slate-200 text-slate-700"
+            >
+              Cancel
+            </button>
+
+            <button
+              type="submit"
+              class="px-5 h-10 rounded-lg bg-indigo-600 text-white font-semibold"
+            >
+              Add Students
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- EDIT Students MODAL -->
+    <div
+      id="editStudentsModal"
+      class="hidden fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+    >
+      <div class="w-full max-w-lg bg-white rounded-2xl shadow-xl p-7">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-2xl font-bold text-slate-900">Edit Students</h2>
+
+          <button
+            id="closeEditStudentsModal"
+            type="button"
+            class="text-red-400 hover:text-red-700 text-xl"
+          >
+            ✕
+          </button>
+        </div>
+
+        <form id="editStudentsForm" class="space-y-4">
+          <input id="editStudentsId" type="hidden" />
+
+          <div>
+            <label
+              for="editFirstName"
+              class="block text-sm font-medium text-slate-700 mb-1"
+            >
+              FirstName
+            </label>
+
+            <input
+              id="editFirstName"
+              type="text"
+              class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+            />
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label
+                for="editLastName"
+                class="block text-sm font-medium text-slate-700 mb-1"
+              >
+                LastName
+              </label>
+
+              <input
+                id="editLastName"
+                type="text"
+                class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+              />
+            </div>
+
+            <div>
+              <label
+                for="editAge"
+                class="block text-sm font-medium text-slate-700 mb-1"
+              >
+                Age
+              </label>
+
+              <input
+                id="editAge"
+                type="number"
+                class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="editPhone"
+              class="block text-sm font-medium text-slate-700 mb-1"
+            >
+              Phone
+            </label>
+
+            <input
+              id="editPhone"
+              type="number"
+              class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+            />
+          </div>
+
+          <div>
+            <label
+              for="editEmail"
+              class="block text-sm font-medium text-slate-700 mb-1"
+            >
+              Email
+            </label>
+
+            <input
+              id="editEmail"
+              type="text"
+              class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+            />
+          </div>
+
+          <div>
+            <label
+              for="editCourseId"
+              class="block text-sm font-medium text-slate-700 mb-1"
+            >
+              CourseId
+            </label>
+
+            <input
+              id="editCourseId"
+              type="number"
+              class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+            />
+          </div>
+
+          <div>
+            <label
+              for="editcourseTitle"
+              class="block text-sm font-medium text-slate-700 mb-1"
+            >
+              courseTitle
+            </label>
+
+            <input
+              id="editcourseTitle"
+              type="text"
+              class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+            />
+          </div>
+
+          <div>
+            <label
+              for="editStatus"
+              class="block text-sm font-medium text-slate-700 mb-1"
+            >
+              Status
+            </label>
+
+            <input
+              id="editStatus"
+              type="number"
+              class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+            />
+          </div>
+
+          <div>
+            <label
+              for="editStatusName"
+              class="block text-sm font-medium text-slate-700 mb-1"
+            >
+              StatusName
+            </label>
+
+            <input
+              id="editStatusName"
+              type="text"
+              class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+            />
+          </div>
+
+          <div class="flex justify-end gap-3 pt-4">
+            <button
+              id="cancelEditStudents"
+              type="button"
+              class="px-5 h-10 rounded-lg border border-slate-200 hover:bg-slate-300 text-slate-700"
+            >
+              Cancel
+            </button>
+
+            <button
+              type="submit"
+              class="px-5 h-10 rounded-lg bg-indigo-600 text-white font-semibold"
+            >
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- DELETE STUDENTS MODAL -->
+    <div
+      id="deleteStudentsModal"
+      class="hidden fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+    >
+      <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-7">
+        <div class="flex justify-center mb-5">
+          <div
+            class="w-14 h-14 rounded-full bg-red-100 flex items-center justify-center"
+          >
+            <img
+              id="deleteModalIcon"
+              src="../assets/trash.svg"
+              alt=""
+              class="w-7 h-7"
+            />
+          </div>
+        </div>
+
+        <h2 class="text-xl font-bold text-center text-slate-900">
+          Delete Students
+        </h2>
+
+        <p class="text-sm text-slate-500 text-center mt-3">
+          Are you sure you want to delete this Students?
+        </p>
+
+        <p
+          id="deleteStudentsTitle"
+          class="text-center font-semibold text-slate-800 mt-2"
+        ></p>
+
+        <p
+          id="deleteStudentsError"
+          class="hidden text-sm text-red-500 text-center mt-4"
+        ></p>
+
+        <div class="flex justify-center gap-3 mt-7">
+          <button
+            id="cancelDeleteStudents"
+            type="button"
+            class="px-5 h-10 rounded-lg border border-slate-200 hover:bg-slate-300 text-slate-700"
+          >
+            Cancel
+          </button>
+
+          <button
+            id="confirmDeleteStudents"
+            type="button"
+            class="px-5 h-10 rounded-lg bg-red-500 hover:bg-red-700 text-white font-semibold"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="../js/students.js"></script>
+    <script type="module" src="../js/navigation.js"></script>
+  </body>
 </html>
