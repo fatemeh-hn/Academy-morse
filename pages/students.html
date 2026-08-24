@@ -169,182 +169,200 @@
       </section>
     </main>
 
-    <!-- add students modal -->
-    <div
-      id="addStudentsModal"
-      class="hidden fixed inset-0 bg-black/40 flex items-center justify-center z-50"
-    >
-      <div class="w-full max-w-lg bg-white rounded-2xl shadow-xl p-7">
-        <div class="flex items-center justify-between mb-6">
-          <h2 class="text-2xl font-bold text-slate-900">Add Students</h2>
+    
+ <!-- add students modal -->
+<div
+  id="addStudentsModal"
+  class="hidden fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4"
+>
+  <div
+    class="w-full max-w-lg h-[650px] bg-white rounded-2xl shadow-xl border border-slate-200 flex flex-col overflow-hidden"
+  >
 
-          <button
-            id="closeAddStudentsModal"
-            type="button"
-            class="text-red-400 hover:text-red-700 text-xl"
+    
+    <div class="flex items-center justify-between p-7 pb-4">
+      <h2 class="text-2xl font-bold text-slate-900">
+        Add Students
+      </h2>
+
+      <button
+        id="closeAddStudentsModal"
+        type="button"
+        class="text-red-400 hover:text-red-700 text-xl"
+      >
+        ✕
+      </button>
+    </div>
+
+
+    
+    <div class="overflow-y-auto  px-7 pb-7 flex-1">
+
+      <form id="addStudentsForm" class="space-y-4">
+
+
+        <div>
+          <label
+            for="addFirstName"
+            class="block text-sm font-medium text-slate-700 mb-1"
           >
-            ✕
-          </button>
+            FirstName
+          </label>
+
+          <input
+            id="addFirstName"
+            type="text"
+            class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+          />
         </div>
 
-        <!-- Form -->
-        <form id="addStudentsForm" class="space-y-4">
+
+        <div class="grid grid-cols-2 gap-4">
+
           <div>
             <label
-              for="addFirstName"
+              for="addLastName"
               class="block text-sm font-medium text-slate-700 mb-1"
             >
-              FirstName
+              LastName
             </label>
 
             <input
-              id="addFirstName"
+              id="addLastName"
               type="text"
               class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
             />
           </div>
 
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label
-                for="addLastName"
-                class="block text-sm font-medium text-slate-700 mb-1"
-              >
-                LastName
-              </label>
-
-              <input
-                id="addLastName"
-                type="text"
-                class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
-              />
-            </div>
-
-            <div>
-              <label
-                for="addAge"
-                class="block text-sm font-medium text-slate-700 mb-1"
-              >
-                Age
-              </label>
-
-              <input
-                id="addAge"
-                type="number"
-                class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
-              />
-            </div>
-          </div>
 
           <div>
             <label
-              for="addPhone"
+              for="addAge"
               class="block text-sm font-medium text-slate-700 mb-1"
             >
-              Phone
+              Age
             </label>
 
             <input
-              id="addPhone"
+              id="addAge"
               type="number"
               class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
             />
           </div>
 
-          <div>
-            <label
-              for="addEmail"
-              class="block text-sm font-medium text-slate-700 mb-1"
-            >
-              Email
-            </label>
+        </div>
 
-            <input
-              id="addEmail"
-              type="text"
-              class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
-            />
-          </div>
 
-          <div>
-            <label
-              for="addCourseId"
-              class="block text-sm font-medium text-slate-700 mb-1"
-            >
-              CourseId
-            </label>
+        <div>
+          <label
+            for="addPhone"
+            class="block text-sm font-medium text-slate-700 mb-1"
+          >
+            Phone
+          </label>
 
-            <input
-              id="addCourseId"
-              type="number"
-              class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
-            />
-          </div>
+          <input
+            id="addPhone"
+            type="text"
+            class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+          />
+        </div>
 
-          <div>
-            <label
-              for="addCourseTitle"
-              class="block text-sm font-medium text-slate-700 mb-1"
-            >
-              CourseTitle
-            </label>
 
-            <input
-              id="addCourseTitle"
-              type="text"
-              class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
-            />
-          </div>
+        <div>
+          <label
+            for="addEmail"
+            class="block text-sm font-medium text-slate-700 mb-1"
+          >
+            Email
+          </label>
 
-          <div>
-            <label
-              for="addstatus"
-              class="block text-sm font-medium text-slate-700 mb-1"
-            >
-              Status
-            </label>
+          <input
+            id="addEmail"
+            type="text"
+            class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+          />
+        </div>
 
-            <input
-              id="addstatus"
-              type="number"
-              class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
-            />
-          </div>
 
-          <div>
-            <label
-              for="addStatusName"
-              class="block text-sm font-medium text-slate-700 mb-1"
-            >
-              StatusName
-            </label>
+        <div>
+          <label
+            for="addCourseId"
+            class="block text-sm font-medium text-slate-700 mb-1"
+          >
+            CourseId
+          </label>
 
-            <input
-              id="addStatusName"
-              type="number"
-              class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
-            />
-          </div>
+          <input
+            id="addCourseId"
+            type="number"
+            class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+          />
+        </div>
 
-          <div class="flex justify-end gap-3 pt-4">
-            <button
-              id="cancelAddStudents"
-              type="button"
-              class="px-5 h-10 rounded-lg border border-slate-200 text-slate-700"
-            >
-              Cancel
-            </button>
 
-            <button
-              type="submit"
-              class="px-5 h-10 rounded-lg bg-indigo-600 text-white font-semibold"
-            >
-              Add Students
-            </button>
-          </div>
-        </form>
-      </div>
+        <div>
+          <label
+            for="addCourseTitle"
+            class="block text-sm font-medium text-slate-700 mb-1"
+          >
+            CourseTitle
+          </label>
+
+          <input
+            id="addCourseTitle"
+            type="text"
+            class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+          />
+        </div>
+
+
+        <div>
+          <label
+            for="addStatus"
+            class="block text-sm font-medium text-slate-700 mb-1"
+            
+          >
+            Status
+          </label>
+
+          <input
+            id="addStatus"
+            type="number"
+            min = "0"
+            max = "2"
+            class="w-full h-11 px-4 rounded-lg border border-slate-200 outline-none focus:border-indigo-600"
+          />
+        </div>
+
+
+        <div class="flex justify-end gap-3 pt-4">
+
+          <button
+            id="cancelAddStudents"
+            type="button"
+            class="px-5 h-10 rounded-lg border border-slate-200 text-slate-700"
+          >
+            Cancel
+          </button>
+
+
+          <button
+            type="submit"
+            class="px-5 h-10 rounded-lg bg-indigo-600 text-white font-semibold"
+          >
+            Add Students
+          </button>
+
+        </div>
+
+
+      </form>
+
     </div>
+
+  </div>
+</div>
 
     <!-- EDIT Students MODAL -->
     <div

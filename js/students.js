@@ -184,3 +184,67 @@ studentsTableBody.addEventListener("click", async (event) => {
 closeStudentsDetailModal.addEventListener("click", () => {
     studentsDetailModal.classList.add("hidden");
 });
+
+
+
+//render add students modal
+const addStudentsButton = document.getElementById("addStudentsButton");
+const addStudentsModal = document.getElementById("addStudentsModal");
+const closeAddStudentsModal = document.getElementById("closeAddStudentsModal");
+const cancelAddStudents = document.getElementById("cancelAddStudents");
+
+addStudentsButton.addEventListener("click", () => {
+  addStudentsModal.classList.remove("hidden");
+});
+
+closeAddStudentsModal.addEventListener("click", () => {
+  addStudentsModal.classList.add("hidden");
+});
+
+cancelAddStudents.addEventListener("click", () => {
+  addStudentsModal.classList.add("hidden");
+});
+
+const addStudentsForm = document.getElementById("addStudentsForm");
+const addFirstName = document.getElementById("addFirstName");
+const addLastName = document.getElementById("addLastName");
+const addAge = document.getElementById("addAge");
+const addPhone = document.getElementById("addPhone");
+const addEmail = document.getElementById("addEmail");
+const addCourseId = document.getElementById("addCourseId");
+const addCourseTitle = document.getElementById("addCourseTitle");
+const addStatus = document.getElementById("addStatus");
+
+
+addStudentsForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  console.log("submit clicked");
+
+  const studentsData = {
+    firstName: addFirstName.value,
+    lastName: addLastName.value,
+    age: Number(addAge.value),
+    phone: addPhone.value,
+    email: addEmail.value,
+    courseId: Number(addCourseId.value),
+    courseTitle: addCourseTitle.value,
+    status: Number(addStatus.value),
+  
+};
+
+  try {
+    const response = await createStudents(studentsData);
+
+    if (response.status === 201) {
+      addStudentsModal.classList.add("hidden");
+      addStudentsForm.reset();
+      await renderStudents();
+    } else if (response.status === 400) {
+
+      console.log(response.data.message);
+    }
+
+  } catch (error) {
+    console.log(error);
+  }
+});
