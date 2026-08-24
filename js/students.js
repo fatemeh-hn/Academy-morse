@@ -71,6 +71,31 @@ const renderStudents = async () => {
           </button>
           </td>
 
+          
+          <td class="px-4 py-4 text-center">
+          <div class="flex items-center justify-center gap-2">
+
+          <button
+          type="button"
+          class="edit-course px-4 py-2 text-xs font-medium rounded-full bg-yellow-100 text-yellow-700 hover:bg-yellow-200 hover:scale-105
+          transition-transform duration-200"
+          data-id="${student.id}"
+          >
+          Edit
+          </button>
+
+          <button
+          type="button"
+          class="delete-course px-4 py-2 text-xs font-medium rounded-full bg-red-100 text-red-700 hover:bg-red-200 hover:scale-105
+          transition-transform duration-200"
+          data-id="${student.id}"
+          >
+          Delete
+          </button>
+
+         </div>
+          </td>
+
         </tr>
       `;
         });
@@ -81,3 +106,81 @@ const renderStudents = async () => {
 };
 await renderStudents()
 
+
+
+//render datail modal
+
+const studentsDetailModal = document.getElementById("studentsDetailModal");
+const closeStudentsDetailModal = document.getElementById("closeStudentsDetailModal");
+const detailId = document.getElementById("detailId");
+const detailFirstName = document.getElementById("detailFirstName");
+const detailLastName = document.getElementById("detailLastName");
+const detailAge = document.getElementById("detailAge");
+const detailPhone = document.getElementById("detailPhone");
+const detailEmail = document.getElementById("detailEmail");
+const detailCourseId = document.getElementById("detailCourseId");
+const detailCourseTitle = document.getElementById("detailCourseTitle");
+const detailStatus = document.getElementById("detailStatus");
+
+
+
+
+studentsTableBody.addEventListener("click", async (event) => {
+
+    const detailsButton = event.target.closest(".details-students");
+
+    if (!detailsButton) return;
+
+    const id = detailsButton.dataset.id;
+
+    try {
+
+        const response = await fetchStudentsId(id);
+
+        const students = response.data;
+
+        detailId.textContent = students.id;
+        detailFirstName.textContent = students.firstName;
+        detailLastName.textContent = students.lastName;
+        detailAge.textContent = students.age;
+        detailPhone.textContent = students.phone;
+        detailEmail.textContent = students.email;
+        detailCourseId.textContent = students.courseId;
+        detailCourseTitle.textContent = students.courseTitle;
+        detailStatus.textContent = students.status;
+
+
+
+        if (students.statusName === "Active") {
+            detailStatus.textContent = "Active";
+
+            detailStatus.className =
+                "px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-700";
+
+        } else if (students.statusName === "Inactive") {
+            detailStatus.textContent = "Inactive";
+
+            detailStatus.className =
+                "px-3 py-1 text-xs font-medium rounded-full bg-red-100 text-red-700";
+
+        } else if (students.statusName === "Graduated") {
+            detailStatus.textContent = "Graduated";
+
+            detailStatus.className =
+                "px-3 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-700";
+
+        }
+
+        studentsDetailModal.classList.remove("hidden");
+
+    } catch (error) {
+
+        console.log(error);
+
+    }
+
+});
+
+closeStudentsDetailModal.addEventListener("click", () => {
+    studentsDetailModal.classList.add("hidden");
+});
