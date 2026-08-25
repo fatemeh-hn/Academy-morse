@@ -329,3 +329,135 @@ confirmDeleteStudents.addEventListener("click", async () => {
 
   }
 });
+
+
+
+
+
+//render edit modal
+
+const editStudentsModal = document.getElementById("editStudentsModal");
+const closeEditStudentsModal = document.getElementById("closeEditStudentsModal");
+const cancelEditStudents = document.getElementById("cancelEditStudents");
+const editStudentsForm = document.getElementById("editStudentsForm");
+
+const editStudentsId = document.getElementById("editStudentsId");
+const editFirstName = document.getElementById("editFirstName");
+const editLastName = document.getElementById("editLastName");
+const editAge = document.getElementById("editAge");
+const editPhone = document.getElementById("editPhone");
+const editEmail = document.getElementById("editEmail");
+const editCourseId = document.getElementById("editCourseId");
+const editCourseTitle = document.getElementById("editCourseTitle");
+const editStatus = document.getElementById("editStatus");
+
+
+
+
+let selectedEditStudentId = null;
+
+studentsTableBody.addEventListener("click", async (event) => {
+
+  const editButton = event.target.closest(".edit-student");
+
+  if (!editButton) return;
+
+  const id = editButton.dataset.id;
+
+  selectedEditStudentId = id;
+
+  try {
+
+    const response = await fetchStudentsId(id);
+
+    const students = response.data;
+
+    editStudentsId.value = students.id;
+    editFirstName.value = students.firstName;
+    editLastName.value = students.lastName;
+    editAge.value = students.age;
+    editPhone.value = students.phone;
+    editEmail.value = students.email;
+    editCourseId.value = students.courseId;
+    editCourseTitle.value = students.courseTitle;
+    editStatus.value = students.status;
+    
+
+    editStudentsModal.classList.remove("hidden");
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+});
+
+
+// close modal with ex
+closeEditStudentsModal.addEventListener("click", () => {
+
+  editStudentsModal.classList.add("hidden");
+
+  selectedEditStudentId = null;
+
+});
+
+
+// close modal with button
+cancelEditStudents.addEventListener("click", () => {
+
+  editStudentsModal.classList.add("hidden");
+
+  selectedEditStudentId = null;
+
+});
+
+
+// post datails
+editStudentsForm.addEventListener("submit", async (event) => {
+
+  event.preventDefault();
+
+  if (!selectedEditStudentId) return;
+
+  const studentsData = {
+  firstName: editFirstName.value.trim(),
+  lastName: editLastName.value.trim(),
+  age: Number(editAge.value),
+  phone: editPhone.value.trim(),
+  email: editEmail.value.trim(),
+  courseId: Number(editCourseId.value),
+  status: Number(editStatus.value)
+};
+
+  try {
+
+    const response = await editStudents(selectedEditStudentId, studentsData);
+
+    if (response.status === 200) {
+
+      editStudentsModal.classList.add("hidden");
+
+      selectedEditStudentId = null;
+
+      await renderStudents();
+
+    } else if (response.status === 400) {
+
+      console.log(response.data.message);
+
+    } else if (response.status === 404) {
+
+      console.log(response.data.message);
+
+    }
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+});
+

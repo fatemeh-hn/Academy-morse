@@ -264,6 +264,8 @@ confirmDeleteCourse.addEventListener("click", async () => {
   }
 });
 
+
+
 //render edit modal
 
 const editCourseModal = document.getElementById("editCourseModal");
