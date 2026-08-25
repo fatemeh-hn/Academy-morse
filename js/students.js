@@ -10,32 +10,32 @@ const studentsTableBody = document.getElementById("studentsTableBody");
 
 
 const statusBadge = (status) => {
-    if (status === "Active") {
-        return `<span class="text-green-600">Active</span>`;
-    }
+  if (status === "Active") {
+    return `<span class="text-green-600">Active</span>`;
+  }
 
-    if (status === "Inactive") {
-        return `<span class="text-red-600">Inactive</span>`;
-    }
+  if (status === "Inactive") {
+    return `<span class="text-red-600">Inactive</span>`;
+  }
 
-    if (status === "Graduated") {
-        return `<span class="text-yellow-600">Graduated</span>`;
-    }
+  if (status === "Graduated") {
+    return `<span class="text-yellow-600">Graduated</span>`;
+  }
 
-    return `<span class="text-gray-600">Unknown</span>`;
+  return `<span class="text-gray-600">Unknown</span>`;
 };
 
 
 const renderStudents = async () => {
-    try {
-        const response = await fetchStudents();
+  try {
+    const response = await fetchStudents();
 
-        const students = response.data.items;
+    const students = response.data.items;
 
-        studentsTableBody.innerHTML = "";
+    studentsTableBody.innerHTML = "";
 
-        students.forEach((student) => {
-            studentsTableBody.innerHTML += `
+    students.forEach((student) => {
+      studentsTableBody.innerHTML += `
         <tr>
           <td class="px-4 py-4">
             ${student.id}
@@ -77,7 +77,7 @@ const renderStudents = async () => {
 
           <button
           type="button"
-          class="edit-course px-4 py-2 text-xs font-medium rounded-full bg-yellow-100 text-yellow-700 hover:bg-yellow-200 hover:scale-105
+          class="edit-student px-4 py-2 text-xs font-medium rounded-full bg-yellow-100 text-yellow-700 hover:bg-yellow-200 hover:scale-105
           transition-transform duration-200"
           data-id="${student.id}"
           >
@@ -86,7 +86,7 @@ const renderStudents = async () => {
 
           <button
           type="button"
-          class="delete-course px-4 py-2 text-xs font-medium rounded-full bg-red-100 text-red-700 hover:bg-red-200 hover:scale-105
+          class="delete-student px-4 py-2 text-xs font-medium rounded-full bg-red-100 text-red-700 hover:bg-red-200 hover:scale-105
           transition-transform duration-200"
           data-id="${student.id}"
           >
@@ -98,11 +98,11 @@ const renderStudents = async () => {
 
         </tr>
       `;
-        });
+    });
 
-    } catch (error) {
-        console.log(error);
-    }
+  } catch (error) {
+    console.log(error);
+  }
 };
 await renderStudents()
 
@@ -127,62 +127,62 @@ const detailStatus = document.getElementById("detailStatus");
 
 studentsTableBody.addEventListener("click", async (event) => {
 
-    const detailsButton = event.target.closest(".details-students");
+  const detailsButton = event.target.closest(".details-students");
 
-    if (!detailsButton) return;
+  if (!detailsButton) return;
 
-    const id = detailsButton.dataset.id;
+  const id = detailsButton.dataset.id;
 
-    try {
+  try {
 
-        const response = await fetchStudentsId(id);
+    const response = await fetchStudentsId(id);
 
-        const students = response.data;
+    const students = response.data;
 
-        detailId.textContent = students.id;
-        detailFirstName.textContent = students.firstName;
-        detailLastName.textContent = students.lastName;
-        detailAge.textContent = students.age;
-        detailPhone.textContent = students.phone;
-        detailEmail.textContent = students.email;
-        detailCourseId.textContent = students.courseId;
-        detailCourseTitle.textContent = students.courseTitle;
-        detailStatus.textContent = students.status;
+    detailId.textContent = students.id;
+    detailFirstName.textContent = students.firstName;
+    detailLastName.textContent = students.lastName;
+    detailAge.textContent = students.age;
+    detailPhone.textContent = students.phone;
+    detailEmail.textContent = students.email;
+    detailCourseId.textContent = students.courseId;
+    detailCourseTitle.textContent = students.courseTitle;
+    detailStatus.textContent = students.status;
 
 
 
-        if (students.statusName === "Active") {
-            detailStatus.textContent = "Active";
+    if (students.statusName === "Active") {
+      detailStatus.textContent = "Active";
 
-            detailStatus.className =
-                "px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-700";
+      detailStatus.className =
+        "px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-700";
 
-        } else if (students.statusName === "Inactive") {
-            detailStatus.textContent = "Inactive";
+    } else if (students.statusName === "Inactive") {
+      detailStatus.textContent = "Inactive";
 
-            detailStatus.className =
-                "px-3 py-1 text-xs font-medium rounded-full bg-red-100 text-red-700";
+      detailStatus.className =
+        "px-3 py-1 text-xs font-medium rounded-full bg-red-100 text-red-700";
 
-        } else if (students.statusName === "Graduated") {
-            detailStatus.textContent = "Graduated";
+    } else if (students.statusName === "Graduated") {
+      detailStatus.textContent = "Graduated";
 
-            detailStatus.className =
-                "px-3 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-700";
-
-        }
-
-        studentsDetailModal.classList.remove("hidden");
-
-    } catch (error) {
-
-        console.log(error);
+      detailStatus.className =
+        "px-3 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-700";
 
     }
+
+    studentsDetailModal.classList.remove("hidden");
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
 
 });
 
 closeStudentsDetailModal.addEventListener("click", () => {
-    studentsDetailModal.classList.add("hidden");
+  studentsDetailModal.classList.add("hidden");
 });
 
 
@@ -229,8 +229,8 @@ addStudentsForm.addEventListener("submit", async (event) => {
     courseId: Number(addCourseId.value),
     courseTitle: addCourseTitle.value,
     status: Number(addStatus.value),
-  
-};
+
+  };
 
   try {
     const response = await createStudents(studentsData);
@@ -246,5 +246,86 @@ addStudentsForm.addEventListener("submit", async (event) => {
 
   } catch (error) {
     console.log(error);
+  }
+});
+
+
+
+
+
+//render delete modal
+const deleteStudentsModal = document.getElementById("deleteStudentsModal");
+const cancelDeleteStudents = document.getElementById("cancelDeleteStudents");
+const confirmDeleteStudents = document.getElementById("confirmDeleteStudents");
+
+const deleteStudentsTitle = document.getElementById("deleteStudentsTitle");
+const deleteStudentsError = document.getElementById("deleteStudentsError");
+
+let selectedStudentId = null;
+
+studentsTableBody.addEventListener("click", async (event) => {
+
+  const deleteButton = event.target.closest(".delete-student");
+
+  if (!deleteButton) return;
+
+  const id = deleteButton.dataset.id;
+
+  selectedStudentId = id;
+
+  const response = await fetchStudentsId(id);
+  const student = response.data;
+
+  deleteStudentsTitle.textContent =
+    `${student.firstName} ${student.lastName} - ${student.courseTitle}`;
+  deleteStudentsError.textContent = "";
+
+
+  deleteStudentsModal.classList.add("hidden");
+
+  deleteStudentsModal.classList.remove("hidden");
+});
+
+cancelDeleteStudents.addEventListener("click", () => {
+  deleteStudentsModal.classList.add("hidden");
+
+  selectedStudentId = null;
+});
+
+confirmDeleteStudents.addEventListener("click", async () => {
+
+  if (!selectedStudentId) return;
+
+  try {
+
+    const response = await deleteStudents(selectedStudentId);
+
+    if (response.status === 200) {
+
+      deleteStudentsModal.classList.add("hidden");
+
+      selectedStudentId = null;
+
+      await renderStudents();
+
+    } else if (response.status === 400) {
+
+      deleteStudentsError.textContent = response.message;
+      deleteStudentsError.classList.remove("hidden");
+
+    } else if (response.status === 404) {
+
+      deleteStudentsError.textContent = response.message;
+      deleteStudentsError.classList.remove("hidden");
+
+    }
+
+  } catch (error) {
+
+    console.log(error);
+
+    deleteStudentsError.textContent = "Unable to connect to the server.";
+    deleteStudentsError.classList.remove("hidden");
+
   }
 });
