@@ -212,7 +212,6 @@ const addAge = document.getElementById("addAge");
 const addPhone = document.getElementById("addPhone");
 const addEmail = document.getElementById("addEmail");
 const addCourseId = document.getElementById("addCourseId");
-const addCourseTitle = document.getElementById("addCourseTitle");
 const addStatus = document.getElementById("addStatus");
 
 
@@ -221,16 +220,14 @@ addStudentsForm.addEventListener("submit", async (event) => {
   console.log("submit clicked");
 
   const studentsData = {
-    firstName: addFirstName.value,
-    lastName: addLastName.value,
-    age: Number(addAge.value),
-    phone: addPhone.value,
-    email: addEmail.value,
-    courseId: Number(addCourseId.value),
-    courseTitle: addCourseTitle.value,
-    status: Number(addStatus.value),
-
-  };
+  firstName: addFirstName.value.trim(),
+  lastName: addLastName.value.trim(),
+  age: Number(addAge.value),
+  phone: addPhone.value.trim(),
+  email: addEmail.value.trim(),
+  courseId: Number(addCourseId.value),
+  status: Number(addStatus.value),
+};
 
   try {
     const response = await createStudents(studentsData);
@@ -460,4 +457,7 @@ editStudentsForm.addEventListener("submit", async (event) => {
   }
 
 });
+
+
+
 
